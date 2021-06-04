@@ -125,10 +125,27 @@ This is my output. As it is seen I am using trust webcam which has path video1 a
 
 To run the camera with gst-launch:
 ```bash
-gst-launch-1.0 v4l2src device=/dev/video1 ! decodebin ! videoconvert ! ximagesink
+$ gst-launch-1.0 v4l2src device=/dev/video1 ! decodebin ! videoconvert ! ximagesink
 ```
 In my case I need to use decodebin element otherwise it will give error.
 decodebin auto-magically constructs a decoding pipeline using available decoders and demuxers via auto-plugging.
+
+## Opencv and gstreamer usage with python3
+For this example I think you need opencv version 4 at least. I tried it on the raspbery pi which has a version of opencv is 3.2.0
+and it gives this error:
+
+```bash
+3.2.0
+OpenCV Error: Assertion failed (size.width>0 && size.height>0) in imshow, file /build/opencv-L65chJ/opencv-3.2.0+dfsg/modules/highgui/src/window.cpp, line 304
+Traceback (most recent call last):
+  File "gstreamerPython.py", line 24, in <module>
+    cv2.imshow('nanoCam',frame)
+cv2.error: /build/opencv-L65chJ/opencv-3.2.0+dfsg/modules/highgui/src/window.cpp:304: error: (-215) size.width>0 && size.height>0 in function imshow
+```
+To run the hello world example with python and opencv:
+```bash
+$ python3 helloWorldGstreamerPython.py
+```
 
 to be continued....
 
