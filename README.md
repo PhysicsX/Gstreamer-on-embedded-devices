@@ -68,10 +68,25 @@ $ gst-launch-1.0 v4l2src ! "video/x-raw,height=300,width=300,framerate=30/1" ! x
 ```
 As it is seen we used xvimagesink instead of ximagesink. -ximagesink supports rgb format, not yuv format; xvimagesink supports yuv and other formats. So xvimagesink can support more formats than the ximagesink. ( that means no need to use videoconvert with xvimagesink)
 
+To run the pi camera on the raspberry pi with rpicamsrc:
+First install the rpicamsrc
+```bash
+$ git clone https://github.com/thaytan/gst-rpicamsrc.git
+$ sudo apt-get install autoconf automake libtool pkg-config libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libraspberrypi-dev 
+
+$ ./autogen.sh --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf/
+$ make
+$ sudo make install
+```
+Then run the command:
+```bash
+$ gst-launch-1.0 rpicamsrc preview=false ! 'video/x-raw, width=320, height=320, framerate=30/1' ! videoconvert ! ximagesink
+```
+
 ## Rtsp usage on raspberry pi  
 These commands for rasppbery pi only.
 We can use rpicamsrc element for rtsp.
-first install rpicamsrc
+first install rpicamsrc if you do not do already (previous step)
 ```bash
 $ git clone https://github.com/thaytan/gst-rpicamsrc.git
 $ sudo apt-get install autoconf automake libtool pkg-config libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libraspberrypi-dev 
