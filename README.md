@@ -161,6 +161,11 @@ To run the hello world example with python and opencv:
 ```bash
 $ python3 helloWorldGstreamerPython.py
 ```
+It is possible to add another drawing to the active frames.
+This will draw a circle on frames :
+```bash
+$ python3 GstreamerDrawing.py
+```
 
 to be continued....
 
