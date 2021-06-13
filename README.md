@@ -166,6 +166,35 @@ This will draw a circle on frames :
 ```bash
 $ python3 GstreamerDrawing.py
 ```
+## Shm with Opencv and gstreamer and python3
+We can send the frames one process to another using shared memory over socket.
+To do that we need to use shmsink and shmsrc elements.
+There is a server and client. For server:
+```bash
+$ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM), width=1920, height=1080,format=NV12, framerate=30/1'  ! nvvidconv flip-method=2  ! videoconvert  !  'video/x-raw, format=(string)I420,  width=(int)1024, height=(int)768, framerate=(fraction)30/1' !     queue !  identity !     shmsink wait-for-connection=1 socket-path=/tmp/tmpsock  shm-size=20000000 sync=true
+```
+This command is used for nvidia nano. You should convert it for raspberry pi accordingly. You will not see any visual output in the screen.
+But frames are avaiable for shmsrc and on the /tmp/tmpsock
+For client:
+```bash
+$ gst-launch-1.0 shmsrc socket-path=/tmp/tmpsock !     'video/x-raw, format=(string)I420, width=(int)1024, height=(int)768, framerate=(fraction)15/1' ! videoconvert ! ximagesink
+```
+When you run the above command you should see the camera output. So now lets try this between two python application.
+
+shmServer.py script will create a shm memory for pi camera output on the nvdia jetson board.
+```bash
+$ python3 shmServer.py
+```
+So now lets use another binary which is Qt application to see the output in the shm.
+You should have at least version 2.12 for the qt. Multimedia modul is used so old versions do not have this module.
+
+For installation I really recommend you to watch my video to set up the qt for nvdia jetson nano.
+```bash
+# ./shmClient -platform eglfs
+```
+So you should see the camera output, which is shared from python script, in the screen.
+
+
 
 to be continued....
 
