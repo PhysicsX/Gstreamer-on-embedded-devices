@@ -194,7 +194,18 @@ For installation I really recommend you to watch my video to set up the qt for n
 ```
 So you should see the camera output, which is shared from python script, in the screen.
 
+Let's make more interesting. Run the face detection example with shared memory usage. Then with the same client
+try to see the output with Qt.
 
+```bash
+$ python3 faceDetectionShm.py
+```
+After runnin the client qt application you should be able to see the rectangle around your face on the screen.
+With qml we can make more interesting things. 
+Compile and run the application which is in shmClient_2 then you will see a red rectangle which can be movable at the 
+same time with face detection is running.
+With Qml Can you imagine what kind of designs can be applied to the python AI applications? Nice !
+![](https://github.com/PhysicsX/Gstreamer-on-embedded-devices/blob/main/out.gif)
 
 to be continued....
 
