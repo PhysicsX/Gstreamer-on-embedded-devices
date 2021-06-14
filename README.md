@@ -1,6 +1,9 @@
 ## Gstreamer on raspberry pi and jetson nano
 This page demonsrates example of gst-lauch tool with some applications using pi camera, web-cam on the raspberry pi and nvidia jetson nano board
 
+![](https://github.com/PhysicsX/Gstreamer-on-embedded-devices/blob/main/intro.gif)
+
+
 ## Installation
 On both board installation is same. 
 
@@ -205,6 +208,7 @@ With qml we can make more interesting things.
 Compile and run the application which is in shmClient_2 then you will see a red rectangle which can be movable at the 
 same time with face detection is running.
 With Qml Can you imagine what kind of designs can be applied to the python AI applications? Nice !
+
 ![](https://github.com/PhysicsX/Gstreamer-on-embedded-devices/blob/main/out.gif)
 
 to be continued....
