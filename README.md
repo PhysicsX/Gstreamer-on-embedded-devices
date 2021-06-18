@@ -1,6 +1,11 @@
 ## Gstreamer on raspberry pi and jetson nano
 This page demonsrates example of gst-lauch tool with some applications using pi camera, web-cam on the raspberry pi and nvidia jetson nano board
 
+Youtube video:
+
+[![Youtube video link](https://img.youtube.com/vi/rPcQiDHyGnI/0.jpg)](//www.youtube.com/watch?v=rPcQiDHyGnI?t=0s "ulas dikme")
+
+
 ![](https://github.com/PhysicsX/Gstreamer-on-embedded-devices/blob/main/intro.gif)
 
 
