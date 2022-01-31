@@ -154,7 +154,7 @@ In my case I need to use decodebin element otherwise it will give error.
 decodebin auto-magically constructs a decoding pipeline using available decoders and demuxers via auto-plugging.
 
 ## Opencv and gstreamer usage with python3
-For this example I think you need opencv version 4 at least. I tried it on the raspbery pi which has a version of opencv is 3.2.0
+For this example I think you need opencv version 4 at least. Also do not forget to enable gstreamer during build process (-D WITH_GSTREAMER=ON ). I tried it on the raspbery pi which has a version of opencv is 3.2.0
 and it gives this error:
 
 ```bash
