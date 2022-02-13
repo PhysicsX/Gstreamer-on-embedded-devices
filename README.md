@@ -194,9 +194,9 @@ shmServer.py script will create a shm memory for pi camera output on the nvdia j
 $ python3 shmServer.py
 ```
 So now lets use another binary which is Qt application to see the output in the shm.
-You should have at least version 2.12 for the qt. Multimedia modul is used so old versions do not have this module.
+You should have at least version 5.12 for the qt. Old multimedia modul may not have this feature.
 
-For installation I really recommend you to watch my video to set up the qt for nvdia jetson nano.
+For Qt installation I really recommend you to watch my video to set up the qt for nvdia jetson nano.
 ```bash
 # ./shmClient -platform eglfs
 ```
@@ -208,8 +208,8 @@ try to see the output with Qt.
 ```bash
 $ python3 faceDetectionShm.py
 ```
-After runnin the client qt application you should be able to see the rectangle around your face on the screen.
-With qml we can make more interesting things. 
+After running the client Qt application you should be able to see the rectangle around your face on the screen.
+With QML we can make more interesting things. 
 Compile and run the application which is in shmClient_2 then you will see a red rectangle which can be movable at the 
 same time with face detection is running.
 With Qml Can you imagine what kind of designs can be applied to the python AI applications? Nice !
