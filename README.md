@@ -146,6 +146,22 @@ Trust Webcam: Trust Webcam (usb-0000:01:00.0-1.2):
 ```
 This is my output. As it is seen I am using trust webcam which has path video1 and video2
 
+To check the capabilities of the usb camera
+```bash
+$ v4l2-ctl -V
+Format Video Capture:
+        Width/Height      : 640/480
+        Pixel Format      : 'YUYV' (YUYV 4:2:2)
+        Field             : None
+        Bytes per Line    : 1280
+        Size Image        : 614400
+        Colorspace        : sRGB
+        Transfer Function : Rec. 709
+        YCbCr/HSV Encoding: ITU-R 601
+        Quantization      : Default (maps to Limited Range)
+        Flags             
+```
+
 To run the camera with gst-launch:
 ```bash
 $ gst-launch-1.0 v4l2src device=/dev/video1 ! decodebin ! videoconvert ! ximagesink
