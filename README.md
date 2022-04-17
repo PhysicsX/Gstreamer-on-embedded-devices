@@ -161,6 +161,88 @@ Format Video Capture:
         Quantization      : Default (maps to Limited Range)
         Flags             
 ```
+Pixel format can be configurable according to camera. To check other formats
+```bash
+ $ v4l2-ctl --device /dev/video0 --list-formats-ext             ioctl: VIDIOC_ENUM_FMT
+        Type: Video Capture
+
+        [0]: 'MJPG' (Motion-JPEG, compressed)
+                Size: Discrete 1920x1080
+                        Interval: Discrete 0.033s (30.000 fps)
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 1280x960
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 1280x720
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 1024x576
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 960x540
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 848x480
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 800x600
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 640x480
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 640x360
+                        Interval: Discrete 0.040s (25.000 fps)
+                Size: Discrete 352x288
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 320x240
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 176x144
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 160x120
+                        Interval: Discrete 0.033s (30.000 fps)
+                Size: Discrete 1920x1080
+                        Interval: Discrete 0.033s (30.000 fps)
+                        Interval: Discrete 0.033s (30.000 fps)
+        [1]: 'YUYV' (YUYV 4:2:2)
+                Size: Discrete 1280x720
+                        Interval: Discrete 0.200s (5.000 fps)
+                        Interval: Discrete 0.200s (5.000 fps)
+                Size: Discrete 1024x576
+                        Interval: Discrete 0.200s (5.000 fps)
+                Size: Discrete 960x540
+                        Interval: Discrete 0.200s (5.000 fps)
+                Size: Discrete 848x480
+                        Interval: Discrete 0.200s (5.000 fps)
+                Size: Discrete 800x600
+                        Interval: Discrete 0.050s (20.000 fps)
+                Size: Discrete 640x480
+                        Interval: Discrete 0.050s (20.000 fps)
+                Size: Discrete 640x360
+                        Interval: Discrete 0.050s (20.000 fps)
+                Size: Discrete 352x288
+                        Interval: Discrete 0.050s (20.000 fps)
+                Size: Discrete 320x240
+                        Interval: Discrete 0.050s (20.000 fps)
+                Size: Discrete 176x144
+                        Interval: Discrete 0.050s (20.000 fps)
+                Size: Discrete 160x120
+                        Interval: Discrete 0.050s (20.000 fps)
+                Size: Discrete 1280x720
+                        Interval: Discrete 0.200s (5.000 fps)
+                        Interval: Discrete 0.200s (5.000 fps)
+
+```
+As it is seen there are two formats for my another camera here. So I can change the format using.
+```bash
+pi@raspberrypi:~ $ v4l2-ctl --device /dev/video0 --set-fmt-video=pixelformat=MJPG
+pi@raspberrypi:~ $ v4l2-ctl -V
+Format Video Capture:
+        Width/Height      : 1280/720
+        Pixel Format      : 'MJPG' (Motion-JPEG)
+        Field             : None
+        Bytes per Line    : 0
+        Size Image        : 1843789
+        Colorspace        : Default
+        Transfer Function : Default (maps to Rec. 709)
+        YCbCr/HSV Encoding: Default (maps to ITU-R 601)
+        Quantization      : Default (maps to Full Range)
+        Flags             :
+
+```
 
 To run the camera with gst-launch:
 ```bash
