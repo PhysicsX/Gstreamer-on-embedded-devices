@@ -37,9 +37,9 @@ $ gst-inspect1.0 videotestsrc
 ```
 This will print useful informations about the element. These informations can be also get for pi camera or other elements. For instance even ximagesink. When you want to change the format of the video it will be very clever to check firt with this command.
 
-To change the size of the vide we can use caps.
+To change the size of the video we can use [caps](https://gstreamer.freedesktop.org/documentation/additional/design/caps.html?gi-language=c)
 ```bash
-$ gst-launch-1.0 videotestsrc ! "video/x-raw,width=300, height=300, framerate=30/1! ximagesink
+$ gst-launch-1.0 videotestsrc ! "video/x-raw,width=300, height=300, framerate=30/1" ! ximagesink
 ```
 If you want to run this test application in gray color format ximagesink will not allow to create the pipeline. It is needed to convert the format for ximagesink that it can understand it. To do it videconvert element can be used easily.
 
