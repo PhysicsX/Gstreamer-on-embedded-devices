@@ -1,5 +1,5 @@
 ## Gstreamer on raspberry pi and jetson nano
-This page demonsrates example of gst-lauch tool with some applications using pi camera, web-cam on the raspberry pi and nvidia jetson nano board
+This page demonstrates an example of gst-lauch tool with some applications using the pi camera, webcam on the raspberry pi, and Nvidia jetson nano board
 
 Youtube video:
 
@@ -10,7 +10,7 @@ Youtube video:
 
 
 ## Installation
-On both board installation is same. 
+On both boards, installation is the same. 
 
 ```bash
 $ sudo apt-get update
@@ -25,29 +25,29 @@ $ sudo apt-get install libgstreamer-plugins-base1.0-dev
 ```
 
 ## Hello World
-For first Hello World application we can use built in elements like videotestsrc.
+For the first Hello World application, we can use built-in elements like videotestsrc.
 
 ```bash
 $ gst-launch-1.0 videotestsrc ! ximagesink
 ```
 The videotestsrc element is used to produce test video data in a wide variety of formats. The video test data produced can be controlled with the "pattern" property.
-It is possible to check capabilities of the elements using gst-inspect-1.0
+It is possible to check the capabilities of the elements using gst-inspect-1.0
 ```bash
 $ gst-inspect1.0 videotestsrc
 ```
-This will print useful informations about the element. These informations can be also get for pi camera or other elements. For instance even ximagesink. When you want to change the format of the video it will be very clever to check firt with this command.
+This will print useful information about the element. This information can also be obtained for the pi camera or other elements. For instance, even ximagesink. When you want to change the format of the video, it will be very clever to check first with this command.
 
 To change the size of the video we can use [caps](https://gstreamer.freedesktop.org/documentation/additional/design/caps.html?gi-language=c)
 ```bash
 $ gst-launch-1.0 videotestsrc ! "video/x-raw,width=300, height=300, framerate=30/1" ! ximagesink
 ```
-If you want to run this test application in gray color format ximagesink will not allow to create the pipeline. It is needed to convert the format for ximagesink that it can understand it. To do it videconvert element can be used easily.
+If you want to run this test application in gray color format ximagesink will not allow you to create the pipeline. It is necessary to convert the format for ximagesink so that it can understand it, so videconvert element can be used easily.
 
 ```bash
 $ gst-launch-1.0 videotestsrc ! "video/x-raw,width=300, height=300, framerate=30/1, format=GRAY16_LE" ! videoconvert ! ximagesink
 ```
-Gstreamer give you abilty to send the frames over socket, network, and more.
-For instance we can create a shared memory and read it over socket.
+Gstreamer allows you to send the frames over a socket, network, and more.
+For instance, we can create a shared memory and read it over the socket.
 for server:
 ```bash
 $ gst-launch-1.0 videotestsrc ! 'video/x-raw,width=300,height=300,format=(string)I420,framerate=(fraction)60/1' ! videoconvert ! shmsink socket-path=/tmp/foo shm-size=20000000
@@ -60,7 +60,7 @@ $ gst-launch-1.0 shmsrc socket-path=/tmp/foo !     'video/x-raw, format=(string)
 ## Pi camera usage  
 To run the picamera on the jetson nano nvarguscamerasrc element can be used.
 
-before run first check the capabilities of the element using:
+before running first check the capabilities of the element using the:
 ```bash
 gst-inspect1.0 nvarguscamerasrc
 ```
@@ -69,12 +69,12 @@ get the view from camera:
 ```bash
 $ gst-launch-1.0 nvarguscamerasrc ! "video/x-raw(memory:NVMM),width=300, height=300, framerate=30/1, format=NV12" ! nvvidconv flip-method=1 ! nvegltransform ! nveglglessink -e
 ```
-To run the pi camera on the raspberry pi ( not forget to enable it first ) it is possible to use v4l2src element.
+To run the pi camera on the raspberry pi (do not forget to enable it first ), it is possible to use v4l2src element.
 v4l2src can be used to capture video from v4l2 devices, like webcams and tv cards.
 ```bash
 $ gst-launch-1.0 v4l2src ! "video/x-raw,height=300,width=300,framerate=30/1" ! xvimagesink`
 ```
-As it is seen we used xvimagesink instead of ximagesink. -ximagesink supports rgb format, not yuv format; xvimagesink supports yuv and other formats. So xvimagesink can support more formats than the ximagesink. ( that means no need to use videoconvert with xvimagesink)
+As it is seen, we used xvimagesink instead of ximagesink. -ximagesink supports RGB format, not YUV format; xvimagesink supports YUVand other formats. So xvimagesink can support more formats than the ximagesink. ( that means no need to use videoconvert with xvimagesink)
 
 To run the pi camera on the raspberry pi with rpicamsrc:
 First install the rpicamsrc
@@ -92,9 +92,9 @@ $ gst-launch-1.0 rpicamsrc preview=false ! 'video/x-raw, width=320, height=320, 
 ```
 
 ## Rtsp usage on raspberry pi  
-These commands for rasppbery pi only.
-We can use rpicamsrc element for rtsp.
-first install rpicamsrc if you do not do already (previous step)
+These commands are for rasppbery pi only.
+We can use the rpicamsrc element for RTSP.
+first, install rpicamsrc if you do not do already (previous step)
 ```bash
 $ git clone https://github.com/thaytan/gst-rpicamsrc.git
 $ sudo apt-get install autoconf automake libtool pkg-config libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libraspberrypi-dev 
@@ -144,7 +144,7 @@ Trust Webcam: Trust Webcam (usb-0000:01:00.0-1.2):
         /dev/video1
         /dev/video2
 ```
-This is my output. As it is seen I am using trust webcam which has path video1 and video2
+This is my output. As it is seen, I am using a trust webcam, which has path video1 and video2
 
 To check the capabilities of the usb camera
 ```bash
@@ -161,7 +161,7 @@ Format Video Capture:
         Quantization      : Default (maps to Limited Range)
         Flags             
 ```
-Pixel format can be configurable according to camera. To check other formats
+Pixel format can be configurable according to the camera. To check other formats
 ```bash
  $ v4l2-ctl --device /dev/video0 --list-formats-ext             ioctl: VIDIOC_ENUM_FMT
         Type: Video Capture
@@ -226,7 +226,7 @@ Pixel format can be configurable according to camera. To check other formats
                         Interval: Discrete 0.200s (5.000 fps)
 
 ```
-As it is seen there are two formats for my another camera here. So I can change the format using.
+As it is seen, there are two formats for my other camera here. So I can change the format using.
 ```bash
 pi@raspberrypi:~ $ v4l2-ctl --device /dev/video0 --set-fmt-video=pixelformat=MJPG
 pi@raspberrypi:~ $ v4l2-ctl -V
@@ -248,11 +248,11 @@ To run the camera with gst-launch:
 ```bash
 $ gst-launch-1.0 v4l2src device=/dev/video1 ! decodebin ! videoconvert ! ximagesink
 ```
-In my case I need to use decodebin element otherwise it will give error.
+In my case, I need to use decodebin element. Otherwise, it will give an error.
 decodebin auto-magically constructs a decoding pipeline using available decoders and demuxers via auto-plugging.
 
 ## Opencv and gstreamer usage with python3
-For this example I think you need opencv version 4 at least. Also do not forget to enable gstreamer during build process (-D WITH_GSTREAMER=ON ). I tried it on the raspbery pi which has a version of opencv is 3.2.0
+For this example, I think you need OpenCV version 4, at least. Also, do not forget to enable gstreamer during the build process (-D WITH_GSTREAMER=ON ). I tried it on the raspberry pi, which has a version of OpenCV is 3.2.0
 and it gives this error:
 
 ```bash
@@ -263,7 +263,7 @@ Traceback (most recent call last):
     cv2.imshow('nanoCam',frame)
 cv2.error: /build/opencv-L65chJ/opencv-3.2.0+dfsg/modules/highgui/src/window.cpp:304: error: (-215) size.width>0 && size.height>0 in function imshow
 ```
-To run the hello world example with python and opencv:
+To run the hello world example with python and OpenCV:
 ```bash
 $ python3 helloWorldGstreamerPython.py
 ```
@@ -273,49 +273,48 @@ This will draw a circle on frames :
 $ python3 GstreamerDrawing.py
 ```
 ## Shm with Opencv and gstreamer and python3
-We can send the frames one process to another using shared memory over socket.
-To do that we need to use shmsink and shmsrc elements.
-There is a server and client. For server:
+We can send the frames from one process to another using shared memory over the socket.
+To do that, we need to use shmsink and shmsrc elements.
+There is a server and a client. For server:
 ```bash
 $ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM), width=1920, height=1080,format=NV12, framerate=30/1'  ! nvvidconv flip-method=2  ! videoconvert  !  'video/x-raw, format=(string)I420,  width=(int)1024, height=(int)768, framerate=(fraction)30/1' !     queue !  identity !     shmsink wait-for-connection=1 socket-path=/tmp/tmpsock  shm-size=20000000 sync=true
 ```
-This command is used for nvidia nano. You should convert it for raspberry pi accordingly. You will not see any visual output in the screen.
-But frames are avaiable for shmsrc and on the /tmp/tmpsock
+This command is used for Nvidia nano. You should convert it for raspberry pi accordingly. You will not see any visual output on the screen.
+But frames are available for shmsrc and on the /tmp/tmpsock
 For client:
 ```bash
 $ gst-launch-1.0 shmsrc socket-path=/tmp/tmpsock !     'video/x-raw, format=(string)I420, width=(int)1024, height=(int)768, framerate=(fraction)15/1' ! videoconvert ! ximagesink
 ```
-When you run the above command you should see the camera output. So now lets try this between two python application.
+When you run the above command, you should see the camera output. So now let's try this between two python applications.
 
-shmServer.py script will create a shm memory for pi camera output on the nvdia jetson board.
+shmServer.py script will create a shm memory for pi camera output on the Nvidia jetson board.
 ```bash
 $ python3 shmServer.py
 ```
-So now lets use another binary which is Qt application to see the output in the shm.
+So now let us use another binary which is the Qt application, to see the output in the shm.
 You should have at least version 5.12 for the qt. Old multimedia modul may not have this feature.
 
-For Qt installation I really recommend you to watch my video to set up the qt for nvdia jetson nano.
+For Qt installation, I really recommend you to watch my video to set up the qt for Nvidia jetson nano.
 ```bash
 # ./shmClient -platform eglfs
 ```
-So you should see the camera output, which is shared from python script, in the screen.
+So you should see the camera output, which is shared from the python script, on the screen.
 
-Let's make more interesting. Run the face detection example with shared memory usage. Then with the same client
+Let's make it more interesting. Run the face detection example with shared memory usage. Then with the same client
 try to see the output with Qt.
 
 ```bash
 $ python3 faceDetectionShm.py
 ```
-After running the client Qt application you should be able to see the rectangle around your face on the screen.
-With QML we can make more interesting things. 
-Compile and run the application which is in shmClient_2 then you will see a red rectangle which can be movable at the 
+After running the client Qt application, you should be able to see the rectangle around your face on the screen.
+With QML, we can make more interesting things. 
+Compile and run the application, which is in shmClient_2; then you will see a red rectangle that can be movable at the 
 same time with face detection is running.
-With Qml Can you imagine what kind of designs can be applied to the python AI applications? Nice !
+With QML, Can you imagine what kind of designs can be applied to the python AI applications? Nice!
 
 ![](https://github.com/PhysicsX/Gstreamer-on-embedded-devices/blob/main/out.gif)
 
-to be continued....
-
+To be continued....
 
 
 
